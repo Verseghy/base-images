@@ -1,0 +1,20 @@
+name: Build and push images
+
+on:
+  push:
+    tags:
+      - '*'
+    branches:
+      - master
+
+jobs:
+  build-push:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Run Makefile for tekton-base
+        shell: bash
+        run: |
+          make tekton-base-build
+          make tekton-base-push
